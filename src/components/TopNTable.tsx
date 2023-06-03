@@ -28,7 +28,8 @@ const TopNTable = (props: TopNTableProps) => {
         const url = props.type === "best" ? "http://localhost:5000/top_N_positive" : "http://localhost:5000/top_N_negative"
         axios.get(`${url}/${topN}`)
         .then((res: AxiosResponse<TopNProduct[]>) => {
-            setResults([...res.data, ...res.data, ...res.data, ...res.data, ...res.data]);
+            // setResults([...res.data, ...res.data, ...res.data, ...res.data, ...res.data]);
+            setResults(res.data);
         })
     }
 
