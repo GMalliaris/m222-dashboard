@@ -1,5 +1,8 @@
+import TopNTable from "../components/TopNTable";
+
 const Best = () => {
-    return <div>This is Best</div>
+    return <TopNTable type="best"/>;
+    
 }
 
 export default Best;

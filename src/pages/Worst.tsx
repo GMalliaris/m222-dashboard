@@ -1,5 +1,7 @@
+import TopNTable from "../components/TopNTable";
+
 const Worst = () => {
-    return <div>This is Worst</div>
+    return <TopNTable type="worst"/>;
 }
 
 export default Worst;
