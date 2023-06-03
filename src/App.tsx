@@ -8,7 +8,7 @@ import AllProducts from './pages/AllProducts'
 
 function App() {
   return (
-    <div className="xl:flex min-h-[100vh] bg-orange-100">
+    <div className="xl:flex xl:min-h-[100vh] bg-orange-100">
       <NavigationBar />
       <Routes>
         <Route path="/" element={ <Dashboard/> } />

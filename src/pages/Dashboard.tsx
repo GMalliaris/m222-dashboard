@@ -1,6 +1,6 @@
 import MockBarChart from "../components/MockBarChart";
 import Card from "../components/Card";
-import { ReactElement } from "react";
+import { ReactElement, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 type DashboardTileProps = {
@@ -30,9 +30,30 @@ const DashboardTile = ({ title, titleClassName, children, className,
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    return <div className="flex-grow p-16" >
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-        <div className="w-full h-full dashboardGrid:grid dashboardGrid:grid-cols-2 dashboardGrid:gap-10">
+    function focusOnInput() {
+        if (!inputRef?.current) {
+            return;
+        }
+        inputRef?.current.focus();
+    }
+
+    return <div className="flex-grow px-16 py-8" >
+
+        <div className="w-full mb-10 flex items-center justify-center">
+            <div className="w-full text-center" >
+                <input ref={inputRef} type="text" className="border-2 border-gray-600 bg-orange-200 h-[40px] w-4/5 rounded-lg px-2
+                    sm:w-2/5 sm:rounded-r-none placeholder-gray-800" placeholder="Enter Amazon Product URL"/>
+                <button className=" bg-orange-300 border-2 border-gray-600 text-gray-800 h-[40px] rounded-lg w-4/5 block mx-auto mt-2
+                    sm:rounded-l-none sm:border-l-0 sm:inline-block sm:px-2 sm:w-auto
+                    hover:bg-orange-400 transition-colors" >
+                    Request Analysis
+                </button>
+            </div>
+        </div>
+
+        <div className="w-full lg:h-screen dashboardGrid:grid dashboardGrid:grid-cols-2 dashboardGrid:gap-10">
             <DashboardTile title="Discover Amazon Products" titleClassName="text-left xl:text-center" className="col-span-2">
                 <>
                     <p className="text-lg font-medium mb-4">
@@ -45,7 +66,7 @@ const Dashboard = () => {
                     </p>
                     <p className="text-lg font-medium">
                         Not sure if you already requested a sentiment analysis for a product? Don't worry about it, you can always browse the products you already 
-                        requested an analysis for and view its report!
+                        requested an analysis for and view their report!
                     </p>
                     <div className="h-full flex items-end justify-end gap-2 pt-6 xl:pt-0">
                         <Link className="px-2 py-1 bg-orange-200 rounded-md border-2 border-gray-600 text-gray-800
@@ -53,9 +74,9 @@ const Dashboard = () => {
                                 View Products' Analysis Report
                         </Link>
                         <button className="px-2 py-1 bg-orange-300 rounded-md border-2 border-gray-600 text-gray-800
-                            hover:bg-orange-400 transition-colors">
-                            Request Analysis
-                            </button>
+                            hover:bg-orange-400 transition-colors" onClick={focusOnInput}>
+                            Request Analysis Now
+                        </button>
                     </div>
                 </>
             </DashboardTile>
