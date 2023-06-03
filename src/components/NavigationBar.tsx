@@ -10,7 +10,7 @@ type ApplicationLogoProps = {
 
 const ApplicationLogo = ({ isToggleOn, setToggle }: ApplicationLogoProps) => {
     return (
-        <div className={`flex md:block ${isToggleOn ? "mb-10" : ""} md:mb-20`}>
+        <div className={`flex xl:block ${isToggleOn ? "mb-10" : ""} xl:mb-20`}>
             <h1 className="text-4xl font-bold align-middle cursor-pointer">
                 <NavLink to="/">
                     <p>
@@ -20,7 +20,7 @@ const ApplicationLogo = ({ isToggleOn, setToggle }: ApplicationLogoProps) => {
                     <p>Reviews Analysis</p>
                 </NavLink>
             </h1>
-            <div className="flex md:hidden flex-grow justify-end items-center text-4xl" onClick={setToggle}>
+            <div className="flex xl:hidden flex-grow justify-end items-center text-4xl" onClick={setToggle}>
                 { isToggleOn ?  <HiChevronUp className="cursor-pointer" /> : <HiChevronDown className="cursor-pointer" />}
             </div>
         </div>
@@ -49,11 +49,11 @@ const NavigationBar = () => {
     const [optionsVisible, setOptionsVisible] = useState(false);
     const [highscoresVisible, setHighscoresVisible] = useState(false);
 
-    return <div className="bg-orange-300 py-8 px-10 max-h-[100vh]">
+    return <div className="bg-orange-300 py-8 px-10 max-h-[100vh] xl:max-h-[100%] min-w-fit">
         <ApplicationLogo isToggleOn={optionsVisible} setToggle={() => setOptionsVisible((prevState) => !prevState)}/>
 
         <div>
-            <h3 className="hidden text-3xl font-semibold cursor-pointer justify-between items-center md:flex" onClick={() => setOptionsVisible((prevState) => !prevState)}>
+            <h3 className="hidden text-3xl font-semibold cursor-pointer justify-between items-center xl:flex" onClick={() => setOptionsVisible((prevState) => !prevState)}>
                 Options
                 { optionsVisible ? <HiChevronUp /> : <HiChevronDown />}
             </h3>
