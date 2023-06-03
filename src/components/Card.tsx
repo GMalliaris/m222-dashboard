@@ -7,8 +7,9 @@ type CardProps = {
 }
 
 const Card = ({ children, className, onClick = () => {} }: CardProps) => {
+    const standardClasses = "border-gray-800 border-2 rounded-lg"
     return (
-        <div className={className} onClick={onClick}>
+        <div className={`${standardClasses} ${className ?? ""}`} onClick={onClick}>
             { children }
         </div>
     );

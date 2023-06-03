@@ -26,7 +26,7 @@ const data = [
 
 const MockBarChart = ({ height = 40, width = 150, fill="red" }: { height?: number, width?: number, fill?: string}) => {
     return (
-        <LibBarChart width={width} height={height} data={data} className="cursor-pointer">
+        <LibBarChart width={width} height={height} data={data} style={{ cursor: "pointer" }}>
             <Bar dataKey="value" fill={fill} />
         </LibBarChart>
     );

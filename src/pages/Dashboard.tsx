@@ -1,7 +1,9 @@
 import MockBarChart from "../components/MockBarChart";
 import Card from "../components/Card";
-import { ReactElement, useRef } from "react";
+import { ReactElement, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai"
+import axios from "axios";
 
 type DashboardTileProps = {
     title: string;
@@ -13,15 +15,12 @@ type DashboardTileProps = {
 
 const DashboardTile = ({ title, titleClassName, children, className, 
     onClick = () => {} }: DashboardTileProps) => {
-    const standardClasses = "border-gray-800 border-2 flex flex-col p-4 mb-8 xl:mb-0";
+    const standardClasses = "flex flex-col p-4 mb-8 xl:mb-0";
     const standardTitleClasses = "pb-4 font-semibold text-xl";
     return (
         <Card className={`${standardClasses} ${className ?? ""}`} onClick={onClick}>
             <>
                 <h3 className={`${standardTitleClasses} ${titleClassName ?? ""}`}>{ title} </h3>
-                {/* <div className="flex justify-end items-end h-full">
-                    { children }
-                </div> */}
                 { children }
             </>
         </Card>
@@ -29,6 +28,9 @@ const DashboardTile = ({ title, titleClassName, children, className,
 }
 
 const Dashboard = () => {
+    const [alertMsg, setAlertMsg] = useState("");
+    const [alertOpen, setAlertOpen] = useState(false);
+
     const navigate = useNavigate();
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -39,15 +41,60 @@ const Dashboard = () => {
         inputRef?.current.focus();
     }
 
-    return <div className="flex-grow px-16 py-8" >
+    async function startAnalysis() {
+        if (!inputRef?.current) {
+            return;
+        }
 
+        const productUrl = inputRef?.current.value;
+        console.log(productUrl);
+
+        let productName: string | null = null;
+
+        try {
+            const res = await axios.post("http://localhost:5000/product_name", { product_url: productUrl})
+            productName = res.data.product_name
+        } catch(e: any) {
+            openAlert("Provided Amazon Product URL is invalid");
+            return;
+        }
+
+        try {
+            await axios.post("http://localhost:5000/start_analysis", { product_url: productUrl})
+            navigate(`/products/${productName}`)
+        }
+        catch(e: any) {
+            openAlert("An error occured: failed to initialize analysis");
+        }
+        
+
+    }
+
+    function closeAlert() {
+        setAlertMsg("");
+        setAlertOpen(false)
+    }
+
+    function openAlert(msg: string) {
+        setAlertMsg(msg);
+        setAlertOpen(true);
+    }
+
+    return <div className="flex-grow px-16 py-8 relative" >
+
+        {alertOpen && <div className="absolute bg-red-300 top-[32px] left-0 right-0 mx-auto max-w-4xl text-center py-4 rounded-md transition-transform font-medium">
+            <div>{ alertMsg }</div>
+            <button type="button" className="absolute right-6 top-[35%]">
+                <AiOutlineClose onClick={closeAlert}/>
+            </button>
+        </div>}
         <div className="w-full mb-10 flex items-center justify-center">
             <div className="w-full text-center" >
                 <input ref={inputRef} type="text" className="border-2 border-gray-600 bg-orange-200 h-[40px] w-4/5 rounded-lg px-2
                     sm:w-2/5 sm:rounded-r-none placeholder-gray-800" placeholder="Enter Amazon Product URL"/>
-                <button className=" bg-orange-300 border-2 border-gray-600 text-gray-800 h-[40px] rounded-lg w-4/5 block mx-auto mt-2
+                <button type="button" className=" bg-orange-300 border-2 border-gray-600 text-gray-800 h-[40px] rounded-lg w-4/5 block mx-auto mt-2
                     sm:rounded-l-none sm:border-l-0 sm:inline-block sm:px-2 sm:w-auto
-                    hover:bg-orange-400 transition-colors" >
+                    hover:bg-orange-400 transition-colors" onClick={startAnalysis}>
                     Request Analysis
                 </button>
             </div>
@@ -73,7 +120,7 @@ const Dashboard = () => {
                             hover:bg-orange-300 transition-colors" to="/products">
                                 View Products' Analysis Report
                         </Link>
-                        <button className="px-2 py-1 bg-orange-300 rounded-md border-2 border-gray-600 text-gray-800
+                        <button type="button" className="px-2 py-1 bg-orange-300 rounded-md border-2 border-gray-600 text-gray-800
                             hover:bg-orange-400 transition-colors" onClick={focusOnInput}>
                             Request Analysis Now
                         </button>
