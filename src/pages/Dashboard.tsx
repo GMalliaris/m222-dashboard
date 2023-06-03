@@ -30,9 +30,9 @@ const DashboardTile = ({ title, titleClassName, children, className,
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    return <div className="flex-grow p-16">
+    return <div className="flex-grow p-16" >
 
-        <div className="w-full h-full xl:grid xl:grid-cols-2 xl:gap-10">
+        <div className="w-full h-full dashboardGrid:grid dashboardGrid:grid-cols-2 dashboardGrid:gap-10">
             <DashboardTile title="Discover Amazon Products" titleClassName="text-left xl:text-center" className="col-span-2">
                 <>
                     <p className="text-lg font-medium mb-4">
@@ -47,7 +47,7 @@ const Dashboard = () => {
                         Not sure if you already requested a sentiment analysis for a product? Don't worry about it, you can always browse the products you already 
                         requested an analysis for and view its report!
                     </p>
-                    <div className="h-full flex items-end justify-end gap-2">
+                    <div className="h-full flex items-end justify-end gap-2 pt-6 xl:pt-0">
                         <Link className="px-2 py-1 bg-orange-200 rounded-md border-2 border-gray-600 text-gray-800
                             hover:bg-orange-300 transition-colors" to="/products">
                                 View Products' Analysis Report

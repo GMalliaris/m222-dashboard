@@ -6,7 +6,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "dashboardGrid": "916px"
+      }
+    },
   },
   plugins: [],
 }
