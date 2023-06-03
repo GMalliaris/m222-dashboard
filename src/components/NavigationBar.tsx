@@ -1,7 +1,7 @@
 import { useState } from "react"
 import logo from "../assets/Amazon-Logo.png"
 import { HiChevronUp, HiChevronDown } from "react-icons/hi";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 type ApplicationLogoProps = {
     isToggleOn: boolean,
@@ -10,7 +10,7 @@ type ApplicationLogoProps = {
 
 const ApplicationLogo = ({ isToggleOn, setToggle }: ApplicationLogoProps) => {
     return (
-        <div className={`flex sm:block ${isToggleOn ? "mb-10" : ""} sm:mb-20`}>
+        <div className={`flex md:block ${isToggleOn ? "mb-10" : ""} md:mb-20`}>
             <h1 className="text-4xl font-bold align-middle cursor-pointer">
                 <NavLink to="/">
                     <p>
@@ -20,7 +20,7 @@ const ApplicationLogo = ({ isToggleOn, setToggle }: ApplicationLogoProps) => {
                     <p>Reviews Analysis</p>
                 </NavLink>
             </h1>
-            <div className="flex sm:hidden flex-grow justify-end items-center text-4xl" onClick={setToggle}>
+            <div className="flex md:hidden flex-grow justify-end items-center text-4xl" onClick={setToggle}>
                 { isToggleOn ?  <HiChevronUp className="cursor-pointer" /> : <HiChevronDown className="cursor-pointer" />}
             </div>
         </div>
@@ -53,7 +53,7 @@ const NavigationBar = () => {
         <ApplicationLogo isToggleOn={optionsVisible} setToggle={() => setOptionsVisible((prevState) => !prevState)}/>
 
         <div>
-            <h3 className="hidden text-3xl font-semibold cursor-pointer justify-between items-center sm:flex" onClick={() => setOptionsVisible((prevState) => !prevState)}>
+            <h3 className="hidden text-3xl font-semibold cursor-pointer justify-between items-center md:flex" onClick={() => setOptionsVisible((prevState) => !prevState)}>
                 Options
                 { optionsVisible ? <HiChevronUp /> : <HiChevronDown />}
             </h3>

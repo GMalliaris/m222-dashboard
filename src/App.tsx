@@ -8,7 +8,7 @@ import AllProducts from './pages/AllProducts'
 
 function App() {
   return (
-    <div className='sm:flex min-h-[100vh]'>
+    <div className='md:flex min-h-[100vh]'>
       <NavigationBar />
       <Routes>
         <Route path="/" element={ <Dashboard/> } />
