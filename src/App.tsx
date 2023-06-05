@@ -12,8 +12,8 @@ function App() {
       <NavigationBar />
       <Routes>
         <Route path="/" element={ <Dashboard/> } />
+        <Route path="/products/all" element={ <AllProducts/> } />
         <Route path="/products/:productName" element={ <SingleProduct/> } />
-        <Route path="/products" element={ <AllProducts/> } />
         <Route path="/best" element={ <Best/> } />
         <Route path="/worst" element={ <Worst/> } />
       </Routes>

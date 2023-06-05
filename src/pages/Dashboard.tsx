@@ -59,13 +59,11 @@ const Dashboard = () => {
 
         try {
             await axios.post("http://localhost:5000/start_analysis", { product_url: productUrl})
-            navigate(`/products/${productName}?new`)
+            navigate(`/products/${productName}?new=start`)
         }
         catch(e: any) {
             openAlert("An error occured: failed to initialize analysis");
         }
-        
-
     }
 
     function closeAlert() {

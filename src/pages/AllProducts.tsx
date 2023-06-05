@@ -35,7 +35,7 @@ const AllProducts = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {results.map((res) => <tr className="hover:bg-orange-400 cursor-pointer" key={Math.floor(Math.random() * 1024)} onClick={() => navigate(`/products/${res.product_name}`)}>
+                    {results.map((res) => <tr className="hover:bg-orange-400 cursor-pointer" key={res.product_name} onClick={() => navigate(`/products/${res.product_name}`)}>
                         <td className="text-left py-2 px-4">{res.product_name}</td>
                         <td className="text-center py-2 px-4">{(res.positive_percentage * 100).toFixed(2)}</td>
                         <td className="text-center py-2 px-4">{(res.negative_percentage * 100).toFixed(2)}</td>

@@ -69,7 +69,7 @@ const TopNTable = (props: TopNTableProps) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {results.map((res, index) => <tr className="hover:bg-orange-400 cursor-pointer" key={Math.floor(Math.random() * 1024)} onClick={() => navigate(`/products/${res.product_name}`)}>
+                    {results.map((res, index) => <tr className="hover:bg-orange-400 cursor-pointer" key={res.product_name} onClick={() => navigate(`/products/${res.product_name}`)}>
                         <td className="text-center py-2 px-4">{index + 1}</td>
                         <td className="text-left py-2 px-4">{res.product_name}</td>
                         { props.type === "Best"

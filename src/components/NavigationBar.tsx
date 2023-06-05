@@ -62,7 +62,7 @@ const NavigationBar = () => {
                     <NavigationBarLink label="Dashboard" location="/"/>
                 </li>
                 <li className="mb-1">
-                    <NavigationBarLink label="Products History" location="/products"/>
+                    <NavigationBarLink label="Products History" location="/products/all"/>
                 </li>
                 <li className="pl-2 mb-1 flex justify-between items-center cursor-pointer" onClick={() => setHighscoresVisible((prevState) => !prevState)} >
                     Highscores
