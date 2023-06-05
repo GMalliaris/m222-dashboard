@@ -1,6 +1,6 @@
 import MockBarChart from "../components/MockBarChart";
 import Card from "../components/Card";
-import { ReactElement, useRef, useState } from "react";
+import { KeyboardEvent, ReactElement, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai"
 import axios from "axios";
@@ -80,6 +80,12 @@ const Dashboard = () => {
         setAlertOpen(true);
     }
 
+    function hanldeKeyUp (event: KeyboardEvent<HTMLInputElement>) {
+        if (event.key === "Enter") {
+            startAnalysis();
+        }
+    }
+
     return <div className="flex-grow px-16 py-8 relative" >
 
         {alertOpen && <div className="absolute bg-red-300 top-[32px] left-0 right-0 mx-auto max-w-4xl text-center py-4 rounded-md transition-transform font-medium">
@@ -91,8 +97,8 @@ const Dashboard = () => {
         <div className="w-full mb-10 flex items-center justify-center">
             <div className="w-full text-center" >
                 <input ref={inputRef} type="text" className="border-2 border-gray-600 bg-orange-200 h-[40px] w-4/5 rounded-lg px-2
-                    sm:w-2/5 sm:rounded-r-none placeholder-gray-800" placeholder="Enter Amazon Product URL"/>
-                <button type="button" className=" bg-orange-300 border-2 border-gray-600 text-gray-800 h-[40px] rounded-lg w-4/5 block mx-auto mt-2
+                    sm:w-2/5 sm:rounded-r-none placeholder-gray-800" placeholder="Enter Amazon Product URL" onKeyUp={hanldeKeyUp}/>
+                <button type="submit" className=" bg-orange-300 border-2 border-gray-600 text-gray-800 h-[40px] rounded-lg w-4/5 block mx-auto mt-2
                     sm:rounded-l-none sm:border-l-0 sm:inline-block sm:px-2 sm:w-auto
                     hover:bg-orange-400 transition-colors" onClick={startAnalysis}>
                     Request Analysis
