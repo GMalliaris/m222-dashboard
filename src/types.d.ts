@@ -7,10 +7,11 @@ export type LegendProperties = {
     height?: number;
 }
 
-export type TopNProduct = {
+export type Product = {
     product_name: string;
     positive_percentage: number
     negative_percentage: number
     positive: number;
     negative: number;
+    neutral: number;
 }
