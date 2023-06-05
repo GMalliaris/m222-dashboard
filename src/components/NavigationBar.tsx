@@ -70,10 +70,10 @@ const NavigationBar = () => {
                 </li>
                 { highscoresVisible && <ul className="text-lg my-2 ml-3">
                     <li className="mb-1">
-                        <NavigationBarLink label="Best Reviews" location="/best"/>
+                        <NavigationBarLink label="With Best Reviews" location="/best"/>
                     </li>
                     <li>
-                        <NavigationBarLink label="Worst Reviews" location="/worst"/>
+                        <NavigationBarLink label="With Worst Reviews" location="/worst"/>
                     </li>
                 </ul> }
             </ul>}
