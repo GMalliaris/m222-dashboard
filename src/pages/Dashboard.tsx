@@ -42,11 +42,10 @@ const Dashboard = () => {
     }
 
     async function startAnalysis() {
-        if (!inputRef?.current) {
+        const productUrl = inputRef?.current?.value;
+        if (!productUrl) {
             return;
         }
-
-        const productUrl = inputRef?.current.value;
 
         let productName: string | null = null;
 
@@ -60,7 +59,7 @@ const Dashboard = () => {
 
         try {
             await axios.post("http://localhost:5000/start_analysis", { product_url: productUrl})
-            navigate(`/products/${productName}`)
+            navigate(`/products/${productName}?new`)
         }
         catch(e: any) {
             openAlert("An error occured: failed to initialize analysis");
@@ -80,7 +79,7 @@ const Dashboard = () => {
     }
 
     function hanldeKeyUp (event: KeyboardEvent<HTMLInputElement>) {
-        if (event.key === "Enter" && inputRef?.current?.value) {
+        if (event.key === "Enter") {
             startAnalysis();
         }
     }
